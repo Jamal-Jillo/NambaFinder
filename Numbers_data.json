@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "644d52bf9446a93d6bc5aad0"
+  },
+  "range": {
+    "start": 700,
+    "end": 709
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d52de9446a93d6bc5aad2"
+  },
+  "range": {
+    "start": 710,
+    "end": 719
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d52ec9446a93d6bc5aad4"
+  },
+  "range": {
+    "start": 720,
+    "end": 729
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d52fc9446a93d6bc5aad6"
+  },
+  "range": {
+    "start": 730,
+    "end": 739
+  },
+  "type": "NDC",
+  "operator": "Airtel Networks Kenya Ltd",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d530b9446a93d6bc5aad8"
+  },
+  "range": {
+    "start": 740,
+    "end": 743
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d547d9446a93d6bc5aadb"
+  },
+  "range": {
+    "start": 744,
+    "end": 744
+  },
+  "type": "NDC",
+  "operator": "Homelands Media Ltd",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d548b9446a93d6bc5aadd"
+  },
+  "range": {
+    "start": 745,
+    "end": 746
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54979446a93d6bc5aadf"
+  },
+  "range": {
+    "start": 747,
+    "end": 747
+  },
+  "type": "NDC",
+  "operator": "Jamii Telecoms Ltd",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54a19446a93d6bc5aae1"
+  },
+  "range": {
+    "start": 748,
+    "end": 748
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54af9446a93d6bc5aae3"
+  },
+  "range": {
+    "start": 749,
+    "end": 749
+  },
+  "type": "NDC",
+  "operator": "Assigned for use by the IEBC in KIEMS Kits",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54ba9446a93d6bc5aae5"
+  },
+  "range": {
+    "start": 750,
+    "end": 756
+  },
+  "type": "NDC",
+  "operator": "Airtel Networks Kenya Ltd",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54c89446a93d6bc5aae7"
+  },
+  "range": {
+    "start": 757,
+    "end": 759
+  },
+  "type": "NDC",
+  "operator": "Safaricom PLC",
+  "description": "Non-geographical number for mobile telephony services"
+},{
+  "_id": {
+    "$oid": "644d54d39446a93d6bc5aae9"
+  },
+  "range": {
+    "start": 760,
+    "end": 760
+  },
+  "type": "NDC",
+  "operator": "Mobile Pay Ltd",
+  "description": "Non-geographical number for mobile telephony services"
+}]
