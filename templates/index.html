@@ -1,34 +1,145 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Phone Number Lookup</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Phone Number Lookup</a>
-	    </div>
-	  </div>
-	</nav>
+	<head>
+		<title>NambaFinder</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="./static/main.css" type="text/css" />
+	</head>
+	<body>
+		<header class="header">
+			<div class="container header__container">
+				<div class="header__logo">
+					<img
+						class="header__img"
+						src="https://image.ibb.co/kcVou6/path3000.png"
+					/>
+					<h1 class="header__title">
+						NambaFinder<span class="header__light">.io</span>
+					</h1>
+				</div>
+			</div>
+		</header>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+		<div class="sect sect--padding-top">
+			<div class="container my-5">
+				<h1 class="display-4 text-center mb-5">Search</h1>
 				<form action="{{ url_for('home') }}" method="post">
-                    {{ form.csrf_token }}
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Enter phone number" name="phone_number">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Search</button>
-						</span>
+					{{ form.csrf_token }}
+					<div class="search-bar">
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Enter Phone number ..."
+							name="phone_number"
+						/>
+							<button class="btn btn-search" type="submit">
+								Search
+							</button>
 					</div>
 				</form>
+				<div class="container mt-5">
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link active stuff" data-toggle="tab" href="#stuff"
+								>Stuff</a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link stuff" data-toggle="tab" href="#more-stuff"
+								>More Stuff</a
+							>
+						</li>
+					</ul>
+
+					<div class="tab-content tab-content-container mt-3">
+						<div id="stuff" class="tab-pane fade show active mytab-content">
+							<section class="accordion" id="how-does-it-work">
+								<h1 class="title">
+									<a href="#how-does-it-work">How does it work?</a>
+								</h1>
+								<div class="content">
+									<div class="wrapper">
+										<p>
+											NambaFinder is a tool that allows you to search for Kenyan
+											phone number operators using the network destination code
+											(NDC). Simply enter the phone number you want to search in
+											the format 254 XXX XXX XXX or 0 XXX XXX XXX and
+											NambaFinder will provide you with the details of the phone
+											number.
+										</p>
+										<p>
+											NambaFinder works by accessing my database of Kenyan NDC
+											numbers obtained from Communications Authority of Kenya
+											and using an algorithm to match the inputted phone number
+											with the corresponding details in the database. This
+											allows you to easily find the information you need without
+											having to manually search through large amounts of data.
+										</p>
+									</div>
+								</div>
+							</section>
+							<section class="accordion" id="overview">
+								<h1 class="title"><a href="#overview">Overview</a></h1>
+								<div class="content">
+									<div class="wrapper">
+										<p>
+											Enter the Phone number you want to search in the following
+											format. 254 XXX XXX XXX or 0 XXX XXX XXX , where the first
+											three digits (XXX) represent the network destination code
+											(NDC), and the remaining seven digits represent the
+											subscriber number.
+										</p>
+									</div>
+								</div>
+							</section>
+							<section class="accordion" id="inspiration">
+								<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+								<div class="content">
+									<div class="wrapper">
+										<p>
+											As a frequent user of mobile phone services in Kenya, I
+											always found it fascinating how many people seemed to know
+											the network destination codes (NDC) by heart. Whether it
+											was Safaricom, Airtel, or Telkom, people could easily
+											identify the network just by looking at the phone number.
+											But for those of us who couldn't quite memorize all those
+											NDCs, it was a frustrating experience trying to figure out
+											which network a phone number belonged to. That's why I was
+											inspired to create NambaFinder, a simple yet powerful tool
+											that takes the guesswork out of identifying Kenyan phone
+											numbers. With NambaFinder, you can quickly and easily
+											identify the network of any phone number in Kenya, and
+											never have to wonder again.
+										</p>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div
+							id="more-stuff"
+							class="tab-pane fade mytab-content"
+							style="box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1)"
+						>
+							<h3>Emergency Numbers</h3>
+							<ul>
+								<li>Police: 999</li>
+								<li>Ambulance: 1199</li>
+								<li>Fire Department: 999</li>
+								<li>Child Helpline: 116</li>
+								<li>Women Helpline: 1195</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

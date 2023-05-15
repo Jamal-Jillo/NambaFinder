@@ -50,6 +50,7 @@ def home():
 def result():
     return render_template('result.html')
 
+
 @app.route('/operator', methods=['GET'])
 def get_operator():
     # phone_number = request.args.get('phone_number')
@@ -66,6 +67,7 @@ def get_operator():
             return jsonify({'error': 'Operator not found'})
     except ValueError as e:
         return jsonify({'error': str(e)})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
