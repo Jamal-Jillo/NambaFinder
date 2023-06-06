@@ -12,6 +12,22 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./static/main.css" type="text/css" />
+		<script src="./static/main.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
 		<header class="header">
@@ -31,7 +47,7 @@
 		<div class="sect sect--padding-top">
 			<div class="container my-5">
 				<h1 class="display-4 text-center mb-5">Search</h1>
-				<form action="{{ url_for('home') }}" method="post">
+				<form action="/" method="post">
 					{{ form.csrf_token }}
 					<div class="search-bar">
 						<input
@@ -39,12 +55,58 @@
 							class="form-control"
 							placeholder="Enter Phone number ..."
 							name="phone_number"
+							id="searchInput"
 						/>
-							<button class="btn btn-search" type="submit">
-								Search
-							</button>
+						<button class="btn btn-search" type="button" onclick="searchNumber()">Search</button>
+		<div id="toast"></div>
+						<button
+							class="btn btn-search"
+							type="submit"
+							data-toggle="modal"
+							data-target="#resultModal"
+							id="searchButton"
+						>
+							Search
+						</button>
+						<script>
+							// Get a reference to the modal element
+							const modal = document.getElementById("resultModal");
+
+							// Get a reference to the search button
+							const searchButton = document.getElementById("searchButton");
+
+							// Add an event listener to the search button
+							searchButton.addEventListener("click", function performSearch() {
+								const query = document.getElementById("searchInput").value;
+								const searchResultsDiv =
+									document.getElementById("searchResults");
+
+								fetch("/", {
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json",
+									},
+									body: JSON.stringify({ phone_number: query }),
+								})
+									.then((response) => response.json())
+									.then((data) => {
+										if (data.operator) {
+											searchResultsDiv.innerHTML = `<p>Phone number belongs to operator: ${data.operator}</p>`;
+										} else if (data.error) {
+											searchResultsDiv.innerHTML = `<p>Error: ${data.error}</p>`;
+										} else {
+											searchResultsDiv.innerHTML = `<p>An error occurred</p>`;
+										}
+										$("#resultModal").modal("show"); // Open the modal
+									})
+									.catch((error) => {
+										console.error("Error:", error);
+									});
+							});
+						</script>
 					</div>
 				</form>
+
 				<div class="container mt-5">
 					<ul class="nav nav-tabs">
 						<li class="nav-item">
@@ -101,7 +163,9 @@
 								</div>
 							</section>
 							<section class="accordion" id="inspiration">
-								<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+								<h1 class="title">
+									<a href="#inspiration">Inspiration</a>
+								</h1>
 								<div class="content">
 									<div class="wrapper">
 										<p>
@@ -137,6 +201,41 @@
 								<li>Women Helpline: 1195</li>
 							</ul>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal container -->
+		<div
+			class="modal fade"
+			id="resultModal"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="myModalLabel"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<!-- Modal content goes here -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">
+							NambaFinder Search Results
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="searchResults">
+						<p>
+							Your search for
+							<strong>{{ form.phone_number.data }}</strong> returned the
+							following results: {{ operator }}
+						</p>
 					</div>
 				</div>
 			</div>

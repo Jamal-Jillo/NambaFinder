@@ -1,5 +1,5 @@
 from oop import PhoneNumber
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, jsonify, request
 from flask_bootstrap import Bootstrap5
 
 from flask_wtf import FlaskForm, CSRFProtect
@@ -27,6 +27,7 @@ class PhoneNumberForm(FlaskForm):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = PhoneNumberForm()
+    operator = None  # default value
 
     if form.validate_on_submit():
         try:
@@ -36,37 +37,21 @@ def home():
             operator = number.lookup_operator()
 
             if operator:
-                #flash(f'Phone number belongs to operator: {operator}')
-                return render_template('result.html', operator=operator, form=form)
+                print("Form data:", form.data)
+                print("Number:", number.number)
+                app.logger.info("Form data: %s", form.data)
+                app.logger.info("Number: %s", number.number)
+                app.logger.info("Submit: %s", form.submit.data)
+                return jsonify({'operator': operator})
             else:
-                flash('Operator not found')
+                return jsonify({'error': 'Operator not found'})
         except ValueError as e:
-            flash(str(e))
+            return jsonify({'error': str(e)})
 
-    return render_template('index.html', form=form)
-
-
-@app.route('/result', methods=['GET'])
-def result():
-    return render_template('result.html')
+    return render_template('index.html', form=form, operator=operator)
 
 
-@app.route('/operator', methods=['GET'])
-def get_operator():
-    # phone_number = request.args.get('phone_number')
-    phone_number = PhoneNumberForm()
-    try:
-        number = PhoneNumber(phone_number)
-        number.parse_number()
-        number.validate_number()
-        operator = number.lookup_operator()
 
-        if operator:
-            return jsonify({'operator': operator})
-        else:
-            return jsonify({'error': 'Operator not found'})
-    except ValueError as e:
-        return jsonify({'error': str(e)})
 
 
 if __name__ == '__main__':
