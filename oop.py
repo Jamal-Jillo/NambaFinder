@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import pymongo
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 
 
 class PhoneNumber:
@@ -14,10 +14,6 @@ class PhoneNumber:
         self.digits = None
         self.first_three = None
         self.code = None
-        self.collection = None
-
-        self.cluster = MongoClient("mongodb+srv://dbUser:1274@cluster0.1r8epag.mongodb.net/test")
-        self.db = self.cluster["NambaFinder"]
 
     def parse_number(self):
         """Parse the phone number."""
@@ -37,14 +33,17 @@ class PhoneNumber:
 
     def lookup_operator(self):
         """Operator lookup."""
-        if self.collection is None:
-            self.collection = self.db["Numbers_data"]
-        result = self.collection.find_one({"range.start": {"$lte": self.code}, "range.end": {"$gte": self.code}})
-        if result:
-            return result["operator"]
-        else:
-            return None
-
+        with MongoClient("mongodb+srv://dbUser:1274@cluster0.1r8epag.mongodb.net/test") as client:
+            try:
+                db = client["NambaFinder"]
+                collection = db["Numbers_data"]
+                result = collection.find_one({"range.start": {"$lte": self.code}, "range.end": {"$gte": self.code}})
+                if result:
+                    return result["operator"]
+                else:
+                    return None
+            except ConnectionFailure:
+                raise ValueError("Failed to connect to the database")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='NambaFinder')
