@@ -13,6 +13,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./static/main.css" type="text/css" />
 		<script src="./static/main.js"></script>
+		
 		<script
 			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -47,7 +48,7 @@
 		<div class="sect sect--padding-top">
 			<div class="container my-5">
 				<h1 class="display-4 text-center mb-5">Search</h1>
-				<form action="/" method="post">
+				<form id="searchForm" action="/" method="post">
 					{{ form.csrf_token }}
 					<div class="search-bar">
 						<input
@@ -56,10 +57,11 @@
 							placeholder="Enter Phone number ..."
 							name="phone_number"
 							id="searchInput"
+							required
 						/>
 						<button class="btn btn-search" type="button" onclick="searchNumber()">Search</button>
 		<div id="toast"></div>
-						<button
+						<!-- <button
 							class="btn btn-search"
 							type="submit"
 							data-toggle="modal"
@@ -103,10 +105,11 @@
 										console.error("Error:", error);
 									});
 							});
-						</script>
+						</script> -->
+						
 					</div>
+					<span id="error" class="error-message"></span>
 				</form>
-
 				<div class="container mt-5">
 					<ul class="nav nav-tabs">
 						<li class="nav-item">
@@ -207,7 +210,7 @@
 		</div>
 
 		<!-- Modal container -->
-		<div
+		<!-- <div
 			class="modal fade"
 			id="resultModal"
 			tabindex="-1"
@@ -215,9 +218,9 @@
 			aria-labelledby="myModalLabel"
 		>
 			<div class="modal-dialog" role="document">
-				<div class="modal-content">
+				<div class="modal-content"> -->
 					<!-- Modal content goes here -->
-					<div class="modal-header">
+					<!--<div class="modal-header">
 						<h5 class="modal-title" id="myModalLabel">
 							NambaFinder Search Results
 						</h5>
@@ -236,9 +239,13 @@
 							<strong>{{ form.phone_number.data }}</strong> returned the
 							following results: {{ operator }}
 						</p>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
+		<script>
+  var searchForm = document.getElementById("searchForm");
+  searchForm.addEventListener("submit", searchNumber);
+</script>
 	</body>
 </html>
